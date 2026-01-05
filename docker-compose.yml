@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  todo-app:
+    build: .
+    image: akash24400/todo-app:latest
+    container_name: todo-app
+    ports:
+      - "8080:80"
+    restart: always
+
