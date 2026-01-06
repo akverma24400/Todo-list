@@ -1,11 +1,31 @@
 version: "3.8"
 
 services:
-  todo-app:
-    build: .
-    image: akash24400/todo-app:latest
-    container_name: todo-app
+  mysql:
+    image: mysql:8
+    container_name: todo-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tododb
     ports:
-      - "8080:80"
-    restart: always
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql        # ✅ MUST MATCH SERVICE NAME
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: tododb
+
+volumes:
+  mysql_data:
+
 
