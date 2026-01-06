@@ -4,10 +4,9 @@ const ListContainer = document.getElementById("list-container");
 const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/todos`;
 
 
-// ✅ Load todos from backend on page load
 window.onload = loadTasks;
 
-// ✅ Add task
+
 function addtask() {
     const task = InputContainer.value.trim();
 
@@ -29,7 +28,7 @@ function addtask() {
     });
 }
 
-// ✅ Load tasks from MySQL
+
 function loadTasks() {
     fetch(API_URL)
         .then(res => res.json())
@@ -48,7 +47,7 @@ function loadTasks() {
         });
 }
 
-// ❌ (Optional) delete not implemented yet
+
 ListContainer.addEventListener("click", function (e) {
     if (e.target.tagName === "SPAN") {
         alert("Delete API not implemented yet");
